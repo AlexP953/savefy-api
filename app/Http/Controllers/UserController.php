@@ -12,9 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->rol !== 'admin') {
-            return response()->json(['error' => 'Unauthorized','code' => 403], 403);
-        }
+        if (!auth()->user()->hasRole('admin')) {
+            return response()->json(['error' => 'Unauthorized', 'code' => 403], 403);
+        }     
 
         return User::all();
     }

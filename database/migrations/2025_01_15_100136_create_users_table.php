@@ -13,7 +13,6 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('password');
-            $table->enum('rol', ['user', 'admin'])->default('user'); // Definir el campo ENUM
             $table->string('email')->unique();
             $table->rememberToken();
             $table->timestamps();
