@@ -1,7 +1,7 @@
 <?php
 namespace Database\Seeders;
 use Illuminate\Database\Seeder;
-use App\Models\User; // Usa tu modelo User
+use App\Models\User; 
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Faker\Factory as Faker;
@@ -22,12 +22,14 @@ class UserSeeder extends Seeder
             $user->assignRole('user'); 
         }
 
-        $admin = User::create([
-            'name' => 'alex',
-            'surname' => 'peris',
-            'password' => Hash::make('1234'),
-            'email' => 'alexperis95@gmail.com',
-        ]);
+        $admin = User::firstOrCreate(
+            ['email' => 'alexperis95@gmail.com'],
+            [
+                'name' => 'alex',
+                'surname' => 'peris',
+                'password' => Hash::make('1234'),
+            ]
+        );
         $admin->assignRole('admin');
     }
 }

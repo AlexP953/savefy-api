@@ -7,6 +7,10 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\RoleSeeder;
+use Database\Seeders\CategorySeeder;
+use Database\Seeders\IncomeSeeder;
+use Database\Seeders\MonthSeeder;
+use Database\Seeders\SpentSeeder;
 
 
 class DatabaseSeeder extends Seeder
@@ -16,11 +20,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
+            CategorySeeder::class,
+            IncomeSeeder::class,
+            MonthSeeder::class,
+            SpentSeeder::class,
         ]);
     }
 }
