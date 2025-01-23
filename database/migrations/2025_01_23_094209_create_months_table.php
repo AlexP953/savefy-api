@@ -16,8 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
             $table->year('year');
             $table->enum('month', ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
-            $table->decimal('total_income', 10, 2)->default(0);
-            $table->decimal('total_spent', 10, 2)->default(0);
             $table->timestamps();
         });
         

@@ -2,27 +2,27 @@ WIP:
 
 php artisan route:list
 
+php artisan serve
+
 ### Run the migrations and seed the data:
 
 ```
 php artisan migrate --seed
+php artisan migrate:fresh --seed (restaura BD)
+```
+
+Generar un Password Grant Client
+```
+php artisan passport:client --password
+
+```
 
 PARA TESTING
 Migraciones
+```
 php artisan migrate --env=testing
-
-<!-- Seeders -->
-<!-- php artisan db:seed --env=testing -->
-
-
+php artisan db:seed --env=testing
 ```
-
-In one terminal, run the following command to start the server:
-
-```
-php artisan serve
-```
-
 
 
 ## WIP
