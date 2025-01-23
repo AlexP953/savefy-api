@@ -72,4 +72,5 @@ return [
         'secret' => env('PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET'),
     ],
 
+    'migrations' => env('APP_ENV') !== 'testing',
 ];
