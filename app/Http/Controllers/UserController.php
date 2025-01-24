@@ -103,7 +103,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        if (!(auth()->user()->can('edit users') || auth()->id() === $request->id)) {
+        if (!(auth()->user()->hasRole('admin')|| auth()->id() === $request->id)) {
             return parent::LogError('Unauthorized' . 'User: ' . auth()->user(), 403);
         }
 
