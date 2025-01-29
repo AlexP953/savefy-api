@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProjectRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -10,17 +11,9 @@ class UserController extends Controller
     /**
      * Get ALL users.
      */
-    public function index()
+    public function index(ProjectRequest $request)
     {
-        if (!auth()->user()->hasRole('admin')) {
-            return parent::LogError('Unauthorized' . 'User: ' . auth()->user(), 403);
-        }     
-
-        try {
             return User::all();
-        } catch (\Throwable $th) {
-            return parent::LogError('Error occurred while retrieving users' . $th, 500);
-        }
     }
 
     /**
@@ -28,12 +21,7 @@ class UserController extends Controller
      */
     public function show(Request $request)
     {
-        try {
             return $request->user();
-        } catch (\Throwable $th) {
-            return parent::LogError($th, 500);
-        }
-        
     }
 
     /**
@@ -101,12 +89,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(ProjectRequest $request)
     {
-        if (!(auth()->user()->hasRole('admin')|| auth()->id() === $request->id)) {
-            return parent::LogError('Unauthorized' . 'User: ' . auth()->user(), 403);
-        }
-
         try {
         $validated = $request->validate([
             'id' => 'required|integer|exists:users,id',
@@ -143,12 +127,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request){
-
-        if (!auth()->user()->hasRole('admin')) {
-            return parent::LogError('Unauthorized' . 'User: ' . auth()->user(), 403);
-        }     
-
+    public function destroy(ProjectRequest $request){
         try {
             $user = User::findOrFail($request->id);
             $user->delete();

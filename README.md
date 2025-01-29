@@ -30,13 +30,13 @@ php artisan db:seed --env=testing
 ## Endpoints Básicos
 
 ### /users 7/5
-- **POST /users** → Crear un nuevo usuario. DONE
-- **GET /users** → Obtener todos los usuarios (admin). DONE
-- **GET /users/{id}** → Obtener un usuario por su ID. DONE
-obtener usuario actual DONE
-obtener usuario por email DONE
-- **PUT /users/{id}** → Actualizar datos de un usuario. DONE
-- **DELETE /users/{id}** → Eliminar un usuario (solo admin). DONE
+- **POST /users** → Crear un nuevo usuario. ✅
+- **GET /users** → Obtener todos los usuarios (admin). ✅
+- **GET /users/{id}** → Obtener un usuario por su ID. ✅
+obtener usuario actual ✅
+obtener usuario por email ✅
+- **PUT /users/{id}** → Actualizar datos de un usuario. ✅
+- **DELETE /users/{id}** → Eliminar un usuario (solo admin). ✅
 
 ### /income 0/5
 - **POST /income** → Crear un nuevo ingreso.
@@ -52,12 +52,12 @@ obtener usuario por email DONE
 - **PUT /spent/{id}** → Actualizar un gasto.
 - **DELETE /spent/{id}** → Eliminar un gasto.
 
-### /category 0/5
-- **POST /category** → Crear una categoría.
-- **GET /category** → Listar todas las categorías.
-- **GET /category/{id}** → Obtener una categoría por ID.
-- **PUT /category/{id}** → Actualizar una categoría.
-- **DELETE /category/{id}** → Eliminar una categoría.
+### /category 5/5
+- **POST /category** → Crear una categoría. ✅
+- **GET /category** → Listar todas las categorías. ✅
+- **GET /category/{id}** → Obtener una categoría por ID. ✅
+- **PUT /category/{id}** → Actualizar una categoría. ✅
+- **DELETE /category/{id}** → Eliminar una categoría. ✅
 
 
 ## Otra lógica 0/1
