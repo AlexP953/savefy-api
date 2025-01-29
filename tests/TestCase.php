@@ -20,6 +20,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         Artisan::call('migrate:fresh');  
+        $this->seed();
         $this->initialize_tests();
     }
 
@@ -31,7 +32,10 @@ abstract class TestCase extends BaseTestCase
         $this->admin = User::factory()->create();
         $this->admin->assignRole('admin');
 
-        $this->user = User::factory()->create();
-        $this->user->assignRole('user');
+        $this->firstUser = User::factory()->create();
+        $this->firstUser->assignRole('user');
+
+        $this->secondUser = User::factory()->create();
+        $this->secondUser->assignRole('user');
     }
 }
