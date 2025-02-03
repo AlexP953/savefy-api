@@ -78,7 +78,7 @@ class CategoryCrudTest extends TestCase
 
     public function test_user_dont_read_all_categories(){
         Passport::actingAs($this->firstUser);
-        $response = $this->getJson("/api/categories/my_categories");
+        $response = $this->getJson("/api/categories/my-categories");
         $response->assertStatus(200);
     
         $userIds = collect($response->json())->pluck('user_id');
@@ -91,7 +91,7 @@ class CategoryCrudTest extends TestCase
 
     public function test_get_one_category_info($category = 'Ocio'){
         Passport::actingAs($this->firstUser);
-        $response = $this->getJson("/api/categories/my_categories/filter?category=$category");
+        $response = $this->getJson("/api/categories/my-categories/filter?category=$category");
         $response->assertStatus(200);
         $categories = collect($response->json());
 
