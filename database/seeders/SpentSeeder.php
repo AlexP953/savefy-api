@@ -22,7 +22,7 @@ class SpentSeeder extends Seeder
         }
 
         $fixedCategories->each(function ($category) {
-            for ($i = 0; $i < 2; $i++) {  
+            for ($i = 0; $i < 5; $i++) {  
                 Spent::create([
                     'amount' => rand(10, 500),  
                     'description' => 'Gasto en ' . $category->name,  

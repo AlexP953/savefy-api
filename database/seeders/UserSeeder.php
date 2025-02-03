@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
     {
 
         $faker = Faker::create('es_ES');
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $user = User::create([
                 'name' => $faker->firstName(),
                 'surname' => $faker->lastName(),
@@ -31,5 +31,15 @@ class UserSeeder extends Seeder
             ]
         );
         $admin->assignRole('admin');
+
+        $normalUser = User::firstOrCreate(
+            ['email' => 'alexperis95X@gmail.com'],
+            [
+                'name' => 'alex2',
+                'surname' => 'peris2',
+                'password' => Hash::make('1234'),
+            ]
+        );
+        $normalUser->assignRole('user');
     }
 }
