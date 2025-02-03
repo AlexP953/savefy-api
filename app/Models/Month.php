@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Month extends Model
 {
     use HasFactory;
+    
+    protected $fillable = ['user_id', 'month', 'year'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

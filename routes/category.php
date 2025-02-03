@@ -7,8 +7,8 @@ Route::middleware('auth:api')->prefix('categories')->group(function () {
   
   // GET
   Route::get('/', [CategoryController::class, 'index']);
-  Route::get('/my_categories', [CategoryController::class, 'show']);
-  Route::get('/my_categories/filter', [CategoryController::class, 'getOneCategorySpents']);
+  Route::get('/my-categories', [CategoryController::class, 'show']);
+  Route::get('/my-categories/filter', [CategoryController::class, 'getOneCategorySpents']);
   Route::get('/id/{id}', [CategoryController::class, 'getCategoryById']);
 
   // POST
