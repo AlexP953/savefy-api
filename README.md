@@ -62,16 +62,16 @@ obtener TODOS los gastos ✅
 - **DELETE /category/{id}** → Eliminar una categoría. ✅
 
 
-## Otra lógica 0/1 --- TEST ❌
+## Otra lógica 0/1 --- TEST ✅
 - **GET /reports/{year}/{month}** → Obtener un desglose detallado de ingresos y gastos para el mes.
 
-### Estadísticas y Gráficos 0/2 --- TEST ❌
-- **GET /stats/categories** → Que porcentaje es cada gasto.
-- **GET /stats/savings** → Calcular ahorro.
+### Estadísticas y Gráficos 0/2 --- TEST ✅
+- **GET /stats/categories** → Que porcentaje es cada gasto. ✅
+- **GET /stats/savings** → Calcular ahorro.✅
 
-### Autenticación y Roles 2/4  --- TEST ❌
+### Autenticación y Roles 2/4  --- TEST ✅
 - **POST /auth/login** → Iniciar sesión y recibir un token. ✅
-- **POST /auth/register** → Registrar nuevos usuarios. 
+- **POST /auth/register** → Registrar nuevos usuarios. ✅
 - **POST /auth/logout** → Cerrar sesión (invalida el token actual).
 - **GET /auth/profile** → Obtener información del usuario autenticado. ✅
 

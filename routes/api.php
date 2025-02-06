@@ -9,5 +9,3 @@ require base_path('routes/income.php');
 require base_path('routes/spent.php');
 require base_path('routes/category.php');
 require base_path('routes/reports.php');
-require base_path('routes/stats.php');
-
