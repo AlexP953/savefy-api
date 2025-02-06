@@ -120,19 +120,20 @@ class FinancialService
           });
       }
 
-      return $query->get()->map(fn ($spent) => [
-          'id' => $spent->id,
-          'amount' => $spent->amount,
-          'description' => $spent->description,
-          'category_id' => $spent->category->id,
-          'category_name' => $spent->category->name,
-          'month_id' => $spent->month->id,
-          'month' => $spent->month->month,
-          'year' => $spent->month->year,
-          'user_id' => $spent->month->user_id,
-          'user_name' => $spent->month->user->name,
-          'surname' => $spent->month->user->surname,
-          'email' => $spent->month->user->email,
+      return $query->get()->map(fn ($record) => [
+          'id' => $record->id,
+          'type' => trim(strrchr($modelClass, "\\"), "\\"),
+          'amount' => $record->amount,
+          'description' => $record->description,
+          'category_id' => $record->category->id,
+          'category_name' => $record->category->name,
+          'month_id' => $record->month->id,
+          'month' => $record->month->month,
+          'year' => $record->month->year,
+          'user_id' => $record->month->user_id,
+          'user_name' => $record->month->user->name,
+          'surname' => $record->month->user->surname,
+          'email' => $record->month->user->email,
       ]);
     }
 
@@ -153,6 +154,7 @@ class FinancialService
       
       return [
             'id' => $record->id,
+            'type' => trim(strrchr($modelClass, "\\"), "\\"),
             'amount' => $record->amount,
             'description' => $record->description,
             'category_name' => $record->category->name,
