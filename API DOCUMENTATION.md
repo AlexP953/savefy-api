@@ -2,6 +2,8 @@
 
 Important: The variable {{ENDPOINT}} must be defined with the address where the server is running. For example, localhost:8000
 
+The {{BEARER_TOKEN_ADMIN}} and {{BEARER_TOKEN_USER}} variable mus be defined with the response of oAuth/getToken -> access_token
+
 ## ENDPOINTS
 
 ### oAuth documentation

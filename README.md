@@ -27,12 +27,12 @@ This project is a personal finance management system that organizes financial da
 Modify the sections related to the database in the `.env` file:
 
 ```
-     DB_CONNECTION=mysql
-     DB_HOST=127.0.0.1
-     DB_PORT=3306
-     DB_DATABASE=savefy
-     DB_USERNAME=<YOUR_USERNAME>
-     DB_PASSWORD=<YOUR_PASSWORD>
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=savefy
+DB_USERNAME=<YOUR_USERNAME>
+DB_PASSWORD=<YOUR_PASSWORD>
 ```
 
 ## Installing Dependencies
@@ -45,10 +45,6 @@ Modify the sections related to the database in the `.env` file:
 
 ## Generate the application key and migrate the database
 
-### Generate the application key:
-```
-php artisan key:generate
-```
 
 ### Create the database locally:
    - Make sure to create a database named `savefy` in your database manager.
@@ -57,6 +53,12 @@ php artisan key:generate
 ```
 php artisan migrate:fresh --seed
 ```
+
+### Generate the application key:
+```
+php artisan key:generate
+```
+
 ## Running the Project
 
 ### Start the development server:
