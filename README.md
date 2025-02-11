@@ -42,6 +42,11 @@ DB_PASSWORD=<YOUR_PASSWORD>
    composer install
   ```
 
+and create the compiled views folder manually with
+
+```
+mkdir -p storage/framework/views
+```
 
 ## Generate the application key and migrate the database
 
@@ -58,16 +63,6 @@ php artisan migrate:fresh --seed
 ```
 php artisan key:generate
 ```
-
-## Running the Project
-
-### Start the development server:
-
-  In one terminal, run the following command to start the server:
-
-  ```
-php artisan serve
-  ```
 
 ## Credentials
 
@@ -97,6 +92,17 @@ You will get something like
   Client secret -- mWpjNtcuF5ntvISje3E9Hbu4orVKCgIjYxgnOYc9
 
   Defines the variables of the same name with the result obtained.
+
+
+## Running the Project
+
+### Start the development server:
+
+  In one terminal, run the following command to start the server:
+
+  ```
+php artisan serve
+  ```
 
 
 ## Testing
