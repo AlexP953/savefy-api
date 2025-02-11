@@ -80,6 +80,8 @@ client_id -
 To generate a client_id and a client_secret we must execute the command:
 
 ```
+php artisan passport:keys
+
 php artisan passport:client --password
 ```
 
