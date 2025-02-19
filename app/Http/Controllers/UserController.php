@@ -24,6 +24,16 @@ class UserController extends Controller
             return $request->user();
     }
 
+    public function getUser($identifier)
+    {
+        if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            return $this->getUserByEmail($identifier);
+        } elseif (ctype_digit($identifier)) {
+            return $this->getUserById($identifier);
+        }
+        return response()->json(['error' => 'Formato inválido'], 400);
+    }
+
     /**
      * Get user by id.
      */
@@ -41,18 +51,14 @@ class UserController extends Controller
     /**
      * Get user by email.
      */
-    public function getUserByEmail(Request $request)
+    public function getUserByEmail($email)
     {
-        $request->validate([
-            'email' => 'required|email',
-        ]);
-    
         try {
-            $user = User::where('email', $request->email)->firstOrFail();
+            $user = User::where('email', $email)->firstOrFail();
             return response()->json($user);
     
         } catch (\Throwable $e) {
-            return parent::LogError('User not found with email: ' . $request->email, 404);
+            return parent::LogError('User not found with email: ' . $email, 404);
         }
     }
 

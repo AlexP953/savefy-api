@@ -32,8 +32,7 @@ class ReportService
         });
     });
     $records = $query->get();
-    $totalAmount = $records->sum('amount');
-
+    $totalAmount = $records->sum('amount') ?: 0;
     return $this->getClearRecords($records, $modelClass, $totalAmount);
 }
 
@@ -71,8 +70,10 @@ public function getAnnualComparison(string $year, Request $request)
 
 public function getAnnualRecords(string $year, Request $request)
 {
-    return $this->getAllOf(Spent::class, $request, 'year', $year)
-        ->merge($this->getAllOf(Income::class, $request, 'year', $year)); 
+  $spentRecords = collect($this->getAllOf(Spent::class, $request, 'year', $year));
+  $incomeRecords = collect($this->getAllOf(Income::class, $request, 'year', $year));
+
+  return $spentRecords->merge($incomeRecords); 
 }
 
 public function getAnnualComparisonReport(string $year, Request $request){

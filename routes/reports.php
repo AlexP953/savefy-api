@@ -5,24 +5,19 @@ use App\Http\Controllers\ReportController;
 
 Route::middleware('auth:api')->prefix('reports')->group(function () {
   
-  // GET
-  Route::get('/getExpensesMonth/{month}', [ReportController::class, 'getExpensesMonth']);
+  Route::get('/expenses/by-month/{month_id}', [ReportController::class, 'getExpensesMonth']);
+  Route::get('/expenses/by-category/{category_id}', [ReportController::class, 'getExpensesCategory']);
+  Route::get('/expenses/by-year/{year}', [ReportController::class, 'getExpensesYear']);
 
-  Route::get('/getExpensesCategory/{category}', [ReportController::class, 'getExpensesCategory']);
+  Route::get('/incomes/by-month/{month_id}', [ReportController::class, 'getIncomesMonth']);
+  Route::get('/incomes/by-category/{category_id}', [ReportController::class, 'getIncomesCategory']);
+  Route::get('/incomes/by-year/{year}', [ReportController::class, 'getIncomesYear']);
 
-  Route::get('/getIncomesMonth/{month}', [ReportController::class, 'getIncomesMonth']);
-
-  Route::get('/getIncomesCategory/{category}', [ReportController::class, 'getIncomesCategory']);
-  
-  Route::get('/getIncomesYear/{year}', [ReportController::class, 'getIncomesYear']);
-
-  Route::get('/getExpensesYear/{year}', [ReportController::class, 'getExpensesYear']);
-
-  Route::get('/getAnnualComparison/{year}', [ReportController::class, 'getAnnualComparison']);
-  Route::get('/getMonthlyComparison/{month}', [ReportController::class, 'getMonthlyComparison']);
+  Route::get('/comparisons/annual/{year}', [ReportController::class, 'getAnnualComparison']);
+  Route::get('/comparisons/monthly/{month_id}', [ReportController::class, 'getMonthlyComparison']);
   
   
-  Route::get('/getAnnualComparisonReport/{year}', [ReportController::class, 'getAnnualComparisonReport']);
-  Route::get('/getMonthlyComparisonReport/{month}', [ReportController::class, 'getMonthlyComparisonReport']);
+  Route::get('/comparisons/annual-report/{year}', [ReportController::class, 'getAnnualComparisonReport']);
+  Route::get('/comparisons/monthly-report/{month_id}', [ReportController::class, 'getMonthlyComparisonReport']);
 
 });
