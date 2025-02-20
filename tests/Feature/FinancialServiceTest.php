@@ -60,7 +60,7 @@ class FinancialServiceTest extends TestCase
     {
         Passport::actingAs($this->firstUser);
         $income = Income::factory()->create(['month_id' => $this->month->id, 'category_id' => $this->category->id]);
-        $response = $this->getJson("/api/incomes/id/{$income->id}");
+        $response = $this->getJson("/api/incomes/{$income->id}");
         $response->assertStatus(200);
     }
 
@@ -68,7 +68,7 @@ class FinancialServiceTest extends TestCase
     {
         Passport::actingAs($this->firstUser);
         $spent = Spent::factory()->create(['month_id' => $this->month->id, 'category_id' => $this->category->id]);
-        $response = $this->getJson("/api/spents/id/{$spent->id}");
+        $response = $this->getJson("/api/spents/{$spent->id}");
         $response->assertStatus(200);
     }
 
@@ -84,7 +84,7 @@ class FinancialServiceTest extends TestCase
             'month_id' => $this->month->id,
         ];
 
-        $response = $this->postJson('/api/incomes/create-income', $data);
+        $response = $this->postJson('/api/incomes', $data);
         $response->assertStatus(200);
         $response->assertJsonFragment(['description' => 'Salario']);
     }
@@ -100,7 +100,7 @@ class FinancialServiceTest extends TestCase
             'month_id' => $this->month->id,
         ];
 
-        $response = $this->postJson('/api/spents/create-spent', $data);
+        $response = $this->postJson('/api/spents', $data);
         $response->assertStatus(200);
         $response->assertJsonFragment(['description' => 'Compra de alimentos']);
     }
@@ -116,7 +116,7 @@ class FinancialServiceTest extends TestCase
             'month_id' => $this->month->id,
         ];
 
-        $response = $this->postJson('/api/incomes/create-income', $data);
+        $response = $this->postJson('/api/incomes', $data);
         $response->assertStatus(500);
     }
 
@@ -131,7 +131,7 @@ class FinancialServiceTest extends TestCase
             'month_id' => $this->month->id,
         ];
 
-        $response = $this->postJson('/api/spents/create-spent', $data);
+        $response = $this->postJson('/api/spents', $data);
         $response->assertStatus(500);
     }
 
@@ -149,7 +149,7 @@ class FinancialServiceTest extends TestCase
             'month_id' => $this->month->id,
         ];
 
-        $response = $this->patchJson('/api/incomes/update', $data);
+        $response = $this->patchJson("/api/incomes/{$income->id}", $data);
         $response->assertStatus(200);
     }
 
@@ -166,7 +166,7 @@ class FinancialServiceTest extends TestCase
             'month_id' => $this->month->id,
         ];
 
-        $response = $this->patchJson('/api/spents/update', $data);
+        $response = $this->patchJson("/api/spents/{$spent->id}", $data);
         $response->assertStatus(200);
     }
 
@@ -183,7 +183,7 @@ class FinancialServiceTest extends TestCase
             'month_id' => $this->month->id,
         ];
 
-        $response = $this->patchJson('/api/incomes/update', $data);
+        $response = $this->patchJson("/api/incomes/{$income->id}", $data);
         $response->assertStatus(500);
     }
 
@@ -200,7 +200,7 @@ class FinancialServiceTest extends TestCase
             'month_id' => $this->month->id,
         ];
 
-        $response = $this->patchJson('/api/spents/update', $data);
+        $response = $this->patchJson("/api/spents/{$spent->id}", $data);
         $response->assertStatus(500);
     }
 
@@ -210,7 +210,7 @@ class FinancialServiceTest extends TestCase
         $income = Income::factory()->create(['month_id' => $this->month->id, 'category_id' => $this->category->id]);
         Passport::actingAs($this->firstUser);
 
-        $response = $this->deleteJson("/api/incomes/delete/{$income->id}");
+        $response = $this->deleteJson("/api/incomes/{$income->id}");
         $response->assertStatus(200);
     }
 
@@ -219,7 +219,7 @@ class FinancialServiceTest extends TestCase
         $spent = Spent::factory()->create(['month_id' => $this->month->id, 'category_id' => $this->category->id]);
         Passport::actingAs($this->firstUser);
 
-        $response = $this->deleteJson("/api/spents/delete/{$spent->id}");
+        $response = $this->deleteJson("/api/spents/{$spent->id}");
         $response->assertStatus(200);
     }
 }

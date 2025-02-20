@@ -28,7 +28,7 @@ class ReportServiceTest extends TestCase
   public function test_admin_get_annual_comparison()
   {
       Passport::actingAs($this->admin);
-      $response = $this->getJson('/api/reports/getAnnualComparison/1980');
+      $response = $this->getJson('/api/reports/comparisons/annual/2025');
       $response->assertStatus(200);
       $response->assertJsonStructure([
           'records', 
@@ -41,7 +41,7 @@ class ReportServiceTest extends TestCase
   public function test_user_get_annual_comparison()
   {
       Passport::actingAs($this->firstUser);
-      $response = $this->getJson('/api/reports/getAnnualComparison/1980');
+      $response = $this->getJson('/api/reports/comparisons/annual/2025');
       $response->assertStatus(200);
       $response->assertJsonStructure([
           'records', 
@@ -54,7 +54,7 @@ class ReportServiceTest extends TestCase
   public function test_admin_get_Monthly_comparison()
   {
       Passport::actingAs($this->admin);
-      $response = $this->getJson('/api/reports/getMonthlyComparison/1980');
+      $response = $this->getJson('/api/reports/comparisons/monthly/1980');
       $response->assertStatus(200);
       $response->assertJsonStructure([
           'records', 
@@ -67,7 +67,7 @@ class ReportServiceTest extends TestCase
   public function test_user_get_Monthly_comparison()
   {
       Passport::actingAs($this->firstUser);
-      $response = $this->getJson('/api/reports/getMonthlyComparison/1980');
+      $response = $this->getJson('/api/reports/comparisons/monthly/1980');
       $response->assertStatus(200);
       $response->assertJsonStructure([
           'records', 
@@ -97,7 +97,7 @@ class ReportServiceTest extends TestCase
 
       $year = $this->month->year;
 
-      $response = $this->getJson("/api/reports/getAnnualComparisonReport/{$year}");
+      $response = $this->getJson("/api/reports/comparisons/annual-report/{$year}");
 
       $response->assertStatus(200);
       $response->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
@@ -121,7 +121,7 @@ class ReportServiceTest extends TestCase
           'month_id' => $this->month->id,
       ]);
 
-      $response = $this->getJson("/api/reports/getMonthlyComparisonReport/{$this->month->id}");
+      $response = $this->getJson("/api/reports/comparisons/monthly-report/{$this->month->id}");
 
       $response->assertStatus(200);
       $response->assertHeader('Content-Type', 'text/csv; charset=UTF-8');

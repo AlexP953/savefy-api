@@ -50,7 +50,7 @@ class UserCrudTest extends TestCase
     public function test_get_user_by_id()
     {
         Passport::actingAs($this->admin);
-        $response = $this->getJson("/api/users/id/{$this->firstUser->id}");
+        $response = $this->getJson("/api/users/{$this->firstUser->id}");
         $response->assertStatus(200);
         $response->assertJsonFragment([
             'email' => $this->firstUser->email,
@@ -61,7 +61,7 @@ class UserCrudTest extends TestCase
     {
         Passport::actingAs($this->admin);
         $response = $this->getJson("/api/users/{9999999999999}");
-        $response->assertStatus(404);
+        $response->assertStatus(400);
     }
 
     // CREATE
@@ -76,7 +76,7 @@ class UserCrudTest extends TestCase
             'password' => 'password123',
             'password_confirmation' => 'password123'
         ];
-        $response = $this->postJson('/api/users/create-user/', $newUserData);
+        $response = $this->postJson('/api/users/', $newUserData);
 
         $response->assertStatus(201);
         $response->assertJson([
@@ -97,7 +97,7 @@ class UserCrudTest extends TestCase
         // Create first user
         $this->postJson('/api/users/create-user/', $newUserData);
         // Second user
-        $response = $this->postJson('/api/users/create-user/', $newUserData);
+        $response = $this->postJson('/api/users/', $newUserData);
 
         $response->assertStatus(500);
     }
@@ -115,7 +115,7 @@ class UserCrudTest extends TestCase
             'password' => 'password123',
             'password_confirmation' => 'password123'
         ];
-        $response = $this->patchJson("/api/users/update", $updatedData);
+        $response = $this->patchJson("/api/users/{$this->firstUser->id}", $updatedData);
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -142,9 +142,9 @@ class UserCrudTest extends TestCase
             'password' => 'password123',
             'password_confirmation' => 'password123',
         ];
-        $response = $this->postJson('/api/users/create-user/', $newUserData);
-        $newUser = $this->getJson("/api/users/email?email=".$newUserData['email']);
-        $response = $this->deleteJson("/api/users/delete-user/{$newUser->json('id')}");
+        $response = $this->postJson('/api/users/', $newUserData);
+        $newUser = $this->getJson("/api/users/".$newUserData['email']);
+        $response = $this->deleteJson("/api/users/{$newUser->json('id')}");
         $response->assertStatus(200);
         $response->assertJson([
             'message' => 'Usuario eliminado correctamente.',
@@ -162,9 +162,9 @@ class UserCrudTest extends TestCase
             'password' => 'password123',
             'password_confirmation' => 'password123'
         ];
-        $response = $this->postJson('/api/users/create-user/', $newUserData);
-        $newUser = $this->getJson("/api/users/email?email=".$newUserData['email']);
-        $response = $this->deleteJson("/api/users/delete-user/{$newUser->json('id')}");
+        $response = $this->postJson('/api/users/', $newUserData);
+        $newUser = $this->getJson("/api/users/".$newUserData['email']);
+        $response = $this->deleteJson("/api/users/{$newUser->json('id')}");
 
         $response->assertStatus(403);
     }
