@@ -47,7 +47,7 @@ class CategoryCrudTest extends TestCase
         Passport::actingAs($this->firstUser);
         $response = $this->createCategoryForUser($this->firstUser);
 
-        $response = $this->postJson('/api/categories/create-category', [
+        $response = $this->postJson('/api/categories', [
             'name' => 'Categoria de prueba',  
             'user_id' => $this->firstUser->id
         ]);
@@ -56,7 +56,7 @@ class CategoryCrudTest extends TestCase
 
     public function test_user_dont_create_category_to_other_user(){
         Passport::actingAs($this->firstUser);
-        $response = $this->postJson('/api/categories/create-category', [
+        $response = $this->postJson('/api/categories', [
             'name' => 'Categoria de prueba',
             'user_id' => 111,
         ]);
@@ -78,7 +78,7 @@ class CategoryCrudTest extends TestCase
 
     public function test_user_dont_read_all_categories(){
         Passport::actingAs($this->firstUser);
-        $response = $this->getJson("/api/categories/my-categories");
+        $response = $this->getJson("/api/categories/user");
         $response->assertStatus(200);
     
         $userIds = collect($response->json())->pluck('user_id');
@@ -91,7 +91,7 @@ class CategoryCrudTest extends TestCase
 
     public function test_get_one_category_info($category = 'Ocio'){
         Passport::actingAs($this->firstUser);
-        $response = $this->getJson("/api/categories/my-categories/filter?category=$category");
+        $response = $this->getJson("/api/categories/user/filter?category=$category");
         $response->assertStatus(200);
         $categories = collect($response->json());
 
@@ -104,7 +104,7 @@ class CategoryCrudTest extends TestCase
 
     public function test_get_category_by_id(){
         Passport::actingAs($this->firstUser);
-        $response = $this->getJson("/api/categories/id/11");
+        $response = $this->getJson("/api/categories/11");
         $response->assertStatus(200);
         $response->assertJsonFragment([
             'name' => 'Deporte',
@@ -147,7 +147,7 @@ class CategoryCrudTest extends TestCase
     public function test_delete_category(){
         $testCategory = $this->createCategoryForUser($this->firstUser);
         Passport::actingAs($this->admin);
-        $this->deleteJson("/api/categories/delete/{$testCategory->id}");
+        $this->deleteJson("/api/categories/{$testCategory->id}");
         $this->assertDatabaseMissing('categories', [
             'id' => $testCategory->id,
         ]);
@@ -156,7 +156,7 @@ class CategoryCrudTest extends TestCase
     public function test_delete_category_from_other_user(){
         $testCategory = $this->createCategoryForUser($this->firstUser);
         Passport::actingAs($this->secondUser);
-        $response = $this->deleteJson("/api/categories/delete/{$testCategory->id}");
+        $response = $this->deleteJson("/api/categories/{$testCategory->id}");
         $response->assertStatus(500);
         $this->assertDatabaseHas('categories', [
             'name' => 'Categoria de prueba',
